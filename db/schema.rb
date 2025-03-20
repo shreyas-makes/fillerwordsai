@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_04_11_204440) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_20_191035) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_04_11_204440) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "filler_word_analytics", force: :cascade do |t|
+    t.bigint "video_id", null: false
+    t.string "word"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_filler_word_analytics_on_video_id"
+  end
+
   create_table "mail_logs", force: :cascade do |t|
     t.bigint "user_id"
     t.string "mailer"
@@ -107,10 +116,52 @@ ActiveRecord::Schema[7.2].define(version: 2024_04_11_204440) do
     t.string "stripe_customer_id"
     t.boolean "paying_customer", default: false
     t.string "stripe_subscription_id"
+    t.string "plan_type"
+    t.integer "credits_remaining"
+    t.text "custom_filler_words"
+    t.float "silence_threshold"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "video_processings", force: :cascade do |t|
+    t.string "title"
+    t.string "file_url"
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.string "processed_url"
+    t.string "file_type"
+    t.float "processing_duration"
+    t.text "blacklisted_words"
+    t.float "pause_threshold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_video_processings_on_user_id"
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.string "status"
+    t.string "original_file_url"
+    t.string "processed_file_url"
+    t.integer "processing_time"
+    t.string "file_type"
+    t.bigint "user_id", null: false
+    t.float "remaining_time"
+    t.text "filler_words"
+    t.float "custom_pause_threshold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "progress"
+    t.text "error_message"
+    t.string "job_id"
+    t.integer "retry_count"
+    t.index ["user_id"], name: "index_videos_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "filler_word_analytics", "videos"
+  add_foreign_key "video_processings", "users"
+  add_foreign_key "videos", "users"
 end

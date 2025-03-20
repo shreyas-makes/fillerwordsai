@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "video_processings/index"
+  get "video_processings/new"
+  get "video_processings/create"
+  get "video_processings/show"
   ActiveAdmin.routes(self)
 
   root 'pages#home'
