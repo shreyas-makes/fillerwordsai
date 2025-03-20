@@ -6,6 +6,7 @@ ruby '3.3.5'
 
 gem 'activeadmin', '4.0.0.beta13'
 gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-mediaconvert', require: false
 gem 'chartkick'
 gem 'delayed', github: 'ryanckulp/delayed' # delayed_job_active_record rails 7 fork: https://github.com/betterment/delayed
 gem 'devise'
