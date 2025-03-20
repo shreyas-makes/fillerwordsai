@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_20_191035) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_20_210109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -156,6 +156,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_191035) do
     t.text "error_message"
     t.string "job_id"
     t.integer "retry_count"
+    t.text "description"
     t.index ["user_id"], name: "index_videos_on_user_id"
   end
 

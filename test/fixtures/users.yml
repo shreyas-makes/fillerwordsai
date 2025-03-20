@@ -1,0 +1,21 @@
+one:
+  email: user1@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  plan_type: monthly
+  credits_remaining: 10
+  silence_threshold: 0.5
+
+two:
+  email: user2@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  plan_type: one_time
+  credits_remaining: 5
+  silence_threshold: 0.3
+
+admin:
+  email: admin@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  admin: true
+  plan_type: monthly
+  credits_remaining: 999
+  silence_threshold: 0.4

@@ -5,53 +5,53 @@ This checklist tracks the implementation progress of the FillerWordsAI project. 
 ## Phase 1: Project Setup and Core Infrastructure
 
 ### Step 1: Project Structure Setup
-- [ ] Create migration for User model extensions
-  - [ ] Add `plan_type` field (string)
-  - [ ] Add `credits_remaining` field (integer)
-  - [ ] Add `custom_filler_words` field (text)
-  - [ ] Add `silence_threshold` field (float)
-- [ ] Create Video model
-  - [ ] Generate migration with all required fields
-  - [ ] Implement model relationships
-  - [ ] Add validations
-  - [ ] Set up serialization for array fields
-- [ ] Create FillerWordAnalytic model
-  - [ ] Generate migration with all required fields
-  - [ ] Implement model relationships
-  - [ ] Add validations
-- [ ] Write model tests
-  - [ ] Test User model extensions
-  - [ ] Test Video model validations and relationships
-  - [ ] Test FillerWordAnalytic model
-  - [ ] Test serialization of array fields
+- [x] Create migration for User model extensions
+  - [x] Add `plan_type` field (string)
+  - [x] Add `credits_remaining` field (integer)
+  - [x] Add `custom_filler_words` field (text)
+  - [x] Add `silence_threshold` field (float)
+- [x] Create Video model
+  - [x] Generate migration with all required fields
+  - [x] Implement model relationships
+  - [x] Add validations
+  - [x] Set up serialization for array fields
+- [x] Create FillerWordAnalytic model
+  - [x] Generate migration with all required fields
+  - [x] Implement model relationships
+  - [x] Add validations
+- [x] Write model tests
+  - [x] Test User model extensions
+  - [x] Test Video model validations and relationships
+  - [x] Test FillerWordAnalytic model
+  - [x] Test serialization of array fields
 
 ### Step 2: File Upload and Storage Implementation
-- [ ] Configure AWS S3 integration
-  - [ ] Update `config/storage.yml`
-  - [ ] Configure environments for proper storage service
-  - [ ] Set up AWS credentials in Rails credentials
-- [ ] Create UploadController
-  - [ ] Implement file upload routes
-  - [ ] Create controller actions for handling uploads
-  - [ ] Add file format validation
-  - [ ] Add file size validation
-- [ ] Build front-end upload components
-  - [ ] Create drag-and-drop interface with Stimulus.js
-  - [ ] Implement upload progress indicators
-  - [ ] Add client-side validations
-  - [ ] Create error message displays
-- [ ] Implement file validation service
-  - [ ] Create service to check file duration
-  - [ ] Add validation for file formats
-  - [ ] Implement file size checks
-- [ ] Update Video model for uploads
-  - [ ] Add methods to track upload status
-  - [ ] Implement callbacks for upload handling
-  - [ ] Add file type detection
-- [ ] Write tests for upload functionality
-  - [ ] Unit tests for validation logic
-  - [ ] Controller tests with mocked uploads
-  - [ ] Integration tests for the upload flow
+- [x] Configure AWS S3 integration
+  - [x] Update `config/storage.yml`
+  - [x] Configure environments for proper storage service
+  - [x] Set up AWS credentials in Rails credentials
+- [x] Create UploadController
+  - [x] Implement file upload routes
+  - [x] Create controller actions for handling uploads
+  - [x] Add file format validation
+  - [x] Add file size validation
+- [x] Build front-end upload components
+  - [x] Create drag-and-drop interface with Stimulus.js
+  - [x] Implement upload progress indicators
+  - [x] Add client-side validations
+  - [x] Create error message displays
+- [x] Implement file validation service
+  - [x] Create service to check file duration
+  - [x] Add validation for file formats
+  - [x] Implement file size checks
+- [x] Update Video model for uploads
+  - [x] Add methods to track upload status
+  - [x] Implement callbacks for upload handling
+  - [x] Add file type detection
+- [x] Write tests for upload functionality
+  - [x] Unit tests for validation logic
+  - [x] Controller tests with mocked uploads
+  - [x] Integration tests for the upload flow
 
 ## Phase 2: Core Functionality
 
