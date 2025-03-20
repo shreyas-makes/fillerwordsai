@@ -1,0 +1,64 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+ ---
+description: MANAGE user authentication and admin privileges in Speedrail using Devise and admin flags
+globs: app/controllers/application_controller.rb, app/models/user.rb
+alwaysApply: false
+---
+
+# Speedrail User Authentication
+
+## Context
+- When implementing authentication features
+- When managing admin privileges
+- When securing admin-only routes
+
+## Requirements
+- Use authenticate_admin! for admin-only features
+- Implement proper admin flag checks
+- Configure Devise for authentication
+- Secure admin routes properly
+- Handle admin privileges in controllers
+
+## Examples
+<example>
+```ruby
+# Proper admin authentication in controller
+class ApplicationController < ActionController::Base
+  def authenticate_admin!
+    unless current_user&.admin?
+      flash[:error] = "You are not authorized to access this area."
+      redirect_to root_path
+    end
+  end
+end
+
+# Admin route protection
+namespace :admin do
+  resources :blog_posts
+  # Other admin routes...
+end
+```
+</example>
+
+<example type="invalid">
+```ruby
+# Don't skip admin authentication
+class AdminController < ApplicationController
+  # Missing authenticate_admin! before_action
+  def index
+    # Admin functionality
+  end
+end
+```
+</example>
+
+## Critical Rules
+  - Always use authenticate_admin! for admin-only features
+  - Check admin flag before granting privileges
+  - Secure all admin routes
+  - Use proper flash messages for unauthorized access
+  - Implement proper redirects for unauthorized users

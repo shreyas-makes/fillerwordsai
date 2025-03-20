@@ -1,0 +1,54 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+ ---
+description: MANAGE blog posts in Speedrail with proper slug generation and asset handling
+globs: app/models/blog_post.rb, app/controllers/blog_posts_controller.rb
+alwaysApply: false
+---
+
+# Speedrail Blog Post Management
+
+## Context
+- When creating or managing blog posts
+- When handling blog post assets and slugs
+
+## Requirements
+- Use generate_unique_slug for URL-friendly slugs
+- Handle assets through Active Storage
+- Configure proper storage service in development
+- Implement proper validation for required fields
+- Use proper asset storage configuration
+
+## Examples
+<example>
+```ruby
+# Proper blog post creation with slug generation
+blog_post = BlogPost.new(
+  title: "My Blog Post",
+  content: "Content here",
+  cover_image: params[:cover_image]
+)
+blog_post.save # Automatically generates unique slug
+```
+</example>
+
+<example type="invalid">
+```ruby
+# Don't skip slug generation
+blog_post = BlogPost.new(
+  title: "My Blog Post",
+  content: "Content here"
+)
+blog_post.slug = "my-blog-post" # Manual slug assignment is discouraged
+```
+</example>
+
+## Critical Rules
+  - Always use generate_unique_slug for URL generation
+  - Configure proper storage service in config/storage.yml
+  - Handle assets through Active Storage
+  - Validate required fields (except cover_image)
+  - Use proper development storage configuration

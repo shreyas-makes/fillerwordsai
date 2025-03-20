@@ -1,0 +1,60 @@
+---
+description: CONFIGURE admin panel features in Speedrail using Active Admin DSL patterns
+globs: app/admin/**/*.rb
+alwaysApply: false
+---
+
+# Speedrail Admin Panel Configuration
+
+## Context
+- When configuring admin panel features in Speedrail
+- When working with Active Admin DSL
+
+## Requirements
+- Use Active Admin DSL for admin panel configuration
+- Follow standard menu priority patterns (1-10)
+- Define explicit actions and filters
+- Use column blocks for index views
+- Leverage authenticate_admin! for security
+
+## Examples
+<example>
+```ruby
+ActiveAdmin.register BlogPost do
+  menu priority: 4
+  actions :index
+  filter :id
+  filter :title
+  
+  index do
+    column :title
+    column :slug
+    column 'status' do |blog_post|
+      blog_post.draft? ? 'Draft' : 'Published'
+    end
+    column :created_at
+    actions
+  end
+end
+```
+</example>
+
+<example type="invalid">
+```ruby
+# Don't skip security checks
+ActiveAdmin.register BlogPost do
+  # Missing authenticate_admin! configuration
+  # Missing explicit actions definition
+  index do
+    column :title
+  end
+end
+```
+</example>
+
+## Critical Rules
+  - Always use authenticate_admin! for admin-only features
+  - Define explicit actions to control CRUD operations
+  - Use menu priority to organize admin navigation
+  - Include relevant filters for search functionality
+  - Follow Active Admin DSL patterns strictly

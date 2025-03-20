@@ -1,0 +1,55 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: IMPLEMENT core Speedrail features using the standard stack of gems and configurations
+globs: Gemfile, config/initializers/*.rb
+alwaysApply: false
+---
+
+# Speedrail Core Features
+
+## Context
+- When setting up new Speedrail features
+- When working with core Speedrail dependencies
+- When configuring Speedrail components
+
+## Requirements
+- Use standard Speedrail gem stack
+- Follow proper configuration patterns
+- Implement proper environment settings
+- Use recommended testing frameworks
+- Follow security best practices
+
+## Examples
+<example>
+```ruby
+# Proper Gemfile configuration
+source "https://rubygems.org"
+gem "rails", "~> 7.0.0"
+gem "devise" # Authentication
+gem "activeadmin" # Admin panel
+gem "delayed_job" # Background jobs
+gem "rspec-rails" # Testing
+gem "rubocop" # Code style
+gem "faker" # Test data
+```
+</example>
+
+<example type="invalid">
+```ruby
+# Don't skip essential gems
+source "https://rubygems.org"
+gem "rails"
+# Missing essential gems like devise, activeadmin
+```
+</example>
+
+## Critical Rules
+  - Always use the recommended gem stack
+  - Follow proper environment configurations
+  - Implement proper testing setup
+  - Use security best practices
+  - Follow Speedrail's coding standards
