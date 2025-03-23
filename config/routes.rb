@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   resources :subscribe, only: [:index]
   resources :dashboard, only: [:index]
   resources :uploads, only: [:new, :create]
+  resources :videos do
+    member do
+      post :process_video
+    end
+  end
   resources :account, only: %i[index update] do
     get :stop_impersonating, on: :collection
   end

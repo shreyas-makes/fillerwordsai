@@ -1,0 +1,57 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">My Videos</h1>
+    <%= link_to "Upload New Video", new_video_path, class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+
+  <% if @videos.empty? %>
+    <div class="bg-white shadow rounded-lg p-8 text-center">
+      <p class="text-gray-600 mb-4">You haven't uploaded any videos yet.</p>
+      <%= link_to "Upload Your First Video", new_video_path, class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% else %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @videos.each do |video| %>
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+          <div class="p-4">
+            <h2 class="text-xl font-semibold mb-2 truncate"><%= video.title %></h2>
+            <div class="text-sm text-gray-500 mb-3">
+              <span class="mr-3">Type: <%= video.file_type.capitalize %></span>
+              <span>Uploaded: <%= time_ago_in_words(video.created_at) %> ago</span>
+            </div>
+            
+            <div class="mb-3">
+              <% case video.status %>
+              <% when 'pending' %>
+                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Pending</span>
+              <% when 'processing' %>
+                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">Processing (<%= video.progress_percentage %>%)</span>
+              <% when 'completed' %>
+                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Completed</span>
+              <% when 'failed' %>
+                <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Failed</span>
+              <% end %>
+            </div>
+            
+            <div class="flex space-x-2">
+              <%= link_to "View", video_path(video), class: "bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded text-sm" %>
+              
+              <% if video.status == 'pending' %>
+                <%= button_to "Process", process_video_video_path(video), method: :post, class: "bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm" %>
+              <% end %>
+              
+              <%= link_to "Edit", edit_video_path(video), class: "bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded text-sm" %>
+              <%= button_to "Delete", video_path(video), method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm" %>
+            </div>
+          </div>
+          
+          <% if video.status == 'processing' %>
+            <div class="w-full bg-gray-200 h-2">
+              <div class="bg-blue-600 h-2" style="width: <%= video.progress_percentage %>%;"></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div> 

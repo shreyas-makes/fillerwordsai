@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_20_210109) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_20_230049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -82,6 +82,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_210109) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "timestamps"
     t.index ["video_id"], name: "index_filler_word_analytics_on_video_id"
   end
 
@@ -157,6 +158,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_210109) do
     t.string "job_id"
     t.integer "retry_count"
     t.text "description"
+    t.string "aws_job_id"
+    t.datetime "processed_at"
     t.index ["user_id"], name: "index_videos_on_user_id"
   end
 

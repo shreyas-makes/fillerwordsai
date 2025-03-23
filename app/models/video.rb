@@ -4,6 +4,7 @@ class Video < ApplicationRecord
   has_one_attached :file
 
   serialize :filler_words, coder: JSON
+  serialize :timestamps, coder: JSON, default: []
 
   # Validations
   validates :title, presence: true
@@ -24,6 +25,32 @@ class Video < ApplicationRecord
     elsif content_type.start_with?('audio/')
       self.file_type = 'audio'
     end
+  end
+
+  # Start MediaConvert processing
+  def start_processing
+    return false unless status == 'pending'
+    
+    # Queue the job
+    VideoProcessingJob.perform_later(id)
+    true
+  end
+
+  # Check if the video has finished processing
+  def finished_processing?
+    status == 'completed'
+  end
+
+  # Calculate total filler word count
+  def total_filler_word_count
+    return 0 if filler_words.blank?
+    
+    filler_words.sum { |_, data| data[:count] || 0 }
+  end
+
+  # Get processing progress percentage
+  def progress_percentage
+    progress || 0
   end
 
   # Set status to pending on creation
